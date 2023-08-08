@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+</head>
+<body>
+    <style>
+            input[type="text"] {
+            width: 200px;
+            padding: 5px;
+            }
+        
+            button {
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+            margin: 5px;
+            }
+            @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,400;1,700;1,900&display=swap');
+            *{
+            font-family: 'Lato', sans-serif;
+            }
+
+            #display{
+
+            text-align: right;
+
+            width: 236px;
+
+            height: 30px;
+
+            font-size: 20px;
+
+            }
+
+            #limpar{
+
+            background-color: rgb(231, 105, 21);
+
+            }
+
+            #igual{
+
+            background-color: rgb(74, 154, 215);
+
+            font-weight: bold;
+
+            }
+
+            #limpar, #igual{
+
+            font-size: 20px;
+
+            }
+
+            #botao, #botao_op, #display{
+
+                box-shadow: -5px -5px 15px rgba(255, 255, 255, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.5);
+
+                border-radius: 10;
+
+                cursor: pointer;
+
+                font-size: 25px;
+
+            }
+            h2{
+                color: rgb(160, 19, 19);
+            }
+        </style>
+        </head>
+        <body>
+        <h2>Simple Calculator</h2>
+        <input type="text" id="display" readonly>
+        <br>
+        <button id="botao" onclick="addValue('1')">1</button>
+        <button id="botao" onclick="addValue('2')">2</button>
+        <button id="botao" onclick="addValue('3')">3</button>
+        <button id="botao_op" onclick="addOperator('+')">+</button>
+        <br>
+        <button id="botao"onclick="addValue('4')">4</button>
+        <button id="botao"onclick="addValue('5')">5</button>
+        <button id="botao"onclick="addValue('6')">6</button>
+        <button id="botao_op" onclick="addOperator('-')">-</button>
+        <br>
+        <button id="botao" onclick="addValue('7')">7</button>
+        <button id="botao" onclick="addValue('8')">8</button>
+        <button id="botao" onclick="addValue('9')">9</button>
+        <button id="botao_op" onclick="addOperator('*')">*</button>
+        <br>
+        <button id="botao" onclick="addValue('0')">0</button>
+        <button id="limpar" onclick="clearDisplay()">C</button>
+        <button id="igual" onclick="calculate()">=</button>
+        <button id="botao_op" onclick="addOperator('/')">/</button>
+        
+        <script>
+            let display = document.getElementById('display');
+            let firstOperand = '';
+            let secondOperand = '';
+            let operator = '';
+        
+            function addValue(value) {
+            if (operator === '') {
+                firstOperand += value;
+                display.value = firstOperand;
+            } else {
+                secondOperand += value;
+                display.value = secondOperand;
+            }
+            }
+        
+            function addOperator(op) {
+            operator = op;
+            }
+        
+            function clearDisplay() {
+            display.value = '';
+            firstOperand = '';
+            secondOperand = '';
+            operator = '';
+            }
+        
+            function calculate() {
+            if (firstOperand === '' || secondOperand === '' || operator === '') {
+                alert('Por favor, insira valores válidos.');
+                return;
+            }
+        
+            let result;
+            const num1 = parseFloat(firstOperand);
+            const num2 = parseFloat(secondOperand);
+        
+            switch (operator) {
+                case '+':
+                result = num1 + num2;
+                break;
+                case '-':
+                result = num1 - num2;
+                break;
+                case '*':
+                result = num1 * num2;
+                break;
+                case '/':
+                result = num1 / num2;
+                break;
+                default:
+                alert('Operador inválido.');
+                return;
+            }
+        
+            display.value = result;
+            firstOperand = result.toString();
+            secondOperand = '';
+            operator = '';
+            }
+        </script>
+    </body>
+    </html>
